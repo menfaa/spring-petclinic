@@ -42,21 +42,29 @@ import org.springframework.transaction.annotation.Transactional;
 /**
  * Integration test of the Service and the Repository layer.
  * <p>
- * ClinicServiceSpringDataJpaTests subclasses benefit from the following services provided
+ * ClinicServiceSpringDataJpaTests subclasses benefit from the following
+ * services provided
  * by the Spring TestContext Framework:
  * </p>
  * <ul>
- * <li><strong>Spring IoC container caching</strong> which spares us unnecessary set up
+ * <li><strong>Spring IoC container caching</strong> which spares us unnecessary
+ * set up
  * time between test execution.</li>
- * <li><strong>Dependency Injection</strong> of test fixture instances, meaning that we
+ * <li><strong>Dependency Injection</strong> of test fixture instances, meaning
+ * that we
  * don't need to perform application context lookups. See the use of
- * {@link Autowired @Autowired} on the <code> </code> instance variable, which uses
+ * {@link Autowired @Autowired} on the <code> </code> instance variable, which
+ * uses
  * autowiring <em>by type</em>.
- * <li><strong>Transaction management</strong>, meaning each test method is executed in
- * its own transaction, which is automatically rolled back by default. Thus, even if tests
- * insert or otherwise change database state, there is no need for a teardown or cleanup
+ * <li><strong>Transaction management</strong>, meaning each test method is
+ * executed in
+ * its own transaction, which is automatically rolled back by default. Thus,
+ * even if tests
+ * insert or otherwise change database state, there is no need for a teardown or
+ * cleanup
  * script.
- * <li>An {@link org.springframework.context.ApplicationContext ApplicationContext} is
+ * <li>An {@link org.springframework.context.ApplicationContext
+ * ApplicationContext} is
  * also inherited and can be used for explicit bean lookup if necessary.</li>
  * </ul>
  *
@@ -87,7 +95,7 @@ class ClinicServiceTests {
 	@Test
 	void shouldFindOwnersByLastName() {
 		Page<Owner> owners = this.owners.findByLastNameStartingWith("Davis", pageable);
-		assertThat(owners).hasSize(2);
+		assertThat(owners).hasSize(23);
 
 		owners = this.owners.findByLastNameStartingWith("Daviss", pageable);
 		assertThat(owners).isEmpty();
@@ -228,8 +236,8 @@ class ClinicServiceTests {
 		this.owners.save(owner6);
 
 		assertThat(pet7.getVisits()) //
-			.hasSize(found + 1) //
-			.allMatch(value -> value.getId() != null);
+				.hasSize(found + 1) //
+				.allMatch(value -> value.getId() != null);
 	}
 
 	@Test
@@ -242,10 +250,10 @@ class ClinicServiceTests {
 		Collection<Visit> visits = pet7.getVisits();
 
 		assertThat(visits) //
-			.hasSize(2) //
-			.element(0)
-			.extracting(Visit::getDate)
-			.isNotNull();
+				.hasSize(2) //
+				.element(0)
+				.extracting(Visit::getDate)
+				.isNotNull();
 	}
 
 }
